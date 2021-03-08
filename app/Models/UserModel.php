@@ -90,13 +90,15 @@ class UserModel extends Model implements ModelInterface
         $offset = $options['offset'] ?? 0;
 
         $builder = $this->builder();
-        if(count($where) === 1){
-            $col = array_key_first($where);
-            $value = array_values($where);
-            $builder->whereIn($col, $value);
-        }
-        if(count($where) > 1){
-            $builder->where($where);
+        if($where){
+            if(count($where) === 1){
+                $col = array_key_first($where);
+                $value = array_values($where);
+                $builder->whereIn($col, $value);
+            }
+            if(count($where) > 1){
+                $builder->where($where);
+            }
         }
         return $builder->get($limit, $offset)
                         ->getResultArray();

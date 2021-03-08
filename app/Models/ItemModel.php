@@ -94,17 +94,19 @@ class ItemModel extends Model implements ModelInterface
         $sortOrder = $options['sortOrder'] ?? 'desc';
 
         $builder = $this->builder();
-        if(count($where) === 1){
-            $col = array_key_first($where);
-            $value = array_values($where);
-            $builder ->whereIn($col, $value);
+        if($where){
+            if(count($where) === 1){
+                $col = array_key_first($where);
+                $value = array_values($where);
+                $builder ->whereIn($col, $value);
+            }
+            if(count($where) > 1){
+                $builder->where($where);
+            }
+            $itemResults = $builder->orderBy($sortBy, $sortOrder)
+                            ->get($limit, $offset)
+                            ->getResultArray();
         }
-        if(count($where) > 1){
-            $builder->where($where);
-        }
-        $itemResults = $builder->orderBy($sortBy, $sortOrder)
-                        ->get($limit, $offset)
-                        ->getResultArray();
         return $this->getItemWithCategories($itemResults);
     }
 
