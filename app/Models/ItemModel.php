@@ -182,10 +182,11 @@ class ItemModel extends Model implements ModelInterface
     protected function getItemWithCategories($itemList){
         $items = [];
         foreach($itemList as $item){
+            $item_id = $item['item_id'];
             $builder = $this->builder('category');
             $item_categories = $builder->select()
                                        ->join('item_listing', 
-                                               "item_listing.item_id = $item->item_id AND
+                                               "item_listing.item_id = $item_id AND
                                                 item_listing.category_id = category.category_id",
                                                 'left')
                                        ->get()
