@@ -93,7 +93,7 @@ class UserModel extends Model implements ModelInterface
         if($where){
             if(count($where) === 1){
                 $col = array_key_first($where);
-                $value = array_values($where);
+                $value = $where[$col];
                 $builder->whereIn($col, $value);
             }
             if(count($where) > 1){
