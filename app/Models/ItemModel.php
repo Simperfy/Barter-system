@@ -103,10 +103,10 @@ class ItemModel extends Model implements ModelInterface
             if(count($where) > 1){
                 $builder->where($where);
             }
-            $itemResults = $builder->orderBy($sortBy, $sortOrder)
+        }
+        $itemResults = $builder->orderBy($sortBy, $sortOrder)
                             ->get($limit, $offset)
                             ->getResultArray();
-        }
         return $this->getItemWithCategories($itemResults);
     }
 
