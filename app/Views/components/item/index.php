@@ -40,7 +40,19 @@
                     <p class="rating"></p>
                 </div>
                 <div class="container status">
-                    <p class="availstatus"><?= $item['avail_status'] ?></p>
+                    <?php if (strtolower($item['avail_status']) === "available"): ?>
+                        <p class="availstatus" style="color: rgb(90, 182, 67);">
+                            <?= $item['avail_status'] ?>
+                        </p>
+                    <?php elseif(strtolower($item['avail_status']) === "unavailable"): ?>
+                        <p class="availstatus" style="color: rgb(204, 23, 23);">
+                            <?= $item['avail_status'] ?>
+                        </p>
+                    <?php elseif(strtolower($item['avail_status']) === "pending"): ?>
+                        <p class="availstatus" style="color: rgb(131, 130, 130);">
+                            <?= $item['avail_status'] ?>
+                        </p>
+                    <?php endif; ?>
                 </div>
                 <div class="container desc">
                     <p class="details">Details</p>
